@@ -71,46 +71,48 @@ const EditNote: React.FC = () => {
     navigate("/", { replace: true });
   };
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h6" component="h2">
-          {t("you-can-edit")}
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              label={t("title")}
-              multiline
-              rows={1}
-              variant="outlined"
-              fullWidth
-              value={title}
-              onChange={titleChangeHandler}
-            />
+    <div style={{ height: "85vh" }}>
+      <Card sx={{ m: 10 }}>
+        <CardContent>
+          <Typography variant="h6" component="h2">
+            {t("you-can-edit")}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label={t("title")}
+                multiline
+                rows={1}
+                variant="outlined"
+                fullWidth
+                value={title}
+                onChange={titleChangeHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              {/* Second text field */}
+              <TextField
+                label={t("content")}
+                multiline
+                rows={3}
+                variant="outlined"
+                fullWidth
+                value={content}
+                onChange={contentChangeHandler}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            {/* Second text field */}
-            <TextField
-              label={t("content")}
-              multiline
-              rows={3}
-              variant="outlined"
-              fullWidth
-              value={content}
-              onChange={contentChangeHandler}
-            />
-          </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions>
-        <Button onClick={() => navigate("/", { replace: true })} size="small">
-          {t("back")}
-        </Button>
-        <Button onClick={editHandler} size="small">
-          {t("edit")}
-        </Button>
-      </CardActions>
-    </Card>
+        </CardContent>
+        <CardActions>
+          <Button onClick={() => navigate("/", { replace: true })} size="small">
+            {t("back")}
+          </Button>
+          <Button onClick={editHandler} size="small">
+            {t("edit")}
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 

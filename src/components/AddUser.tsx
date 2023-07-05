@@ -31,31 +31,33 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h6" component="h2">
-          {t("enter-user-name")}
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              label={t("name")}
-              multiline
-              rows={1}
-              variant="outlined"
-              fullWidth
-              value={name}
-              onChange={nameChangeHandler}
-            />
+    <div style={{ height: "85vh" }}>
+      <Card sx={{ m: 10 }}>
+        <CardContent>
+          <Typography variant="h6" component="h2">
+            {t("enter-user-name")}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label={t("name")}
+                multiline
+                rows={1}
+                variant="outlined"
+                fullWidth
+                value={name}
+                onChange={nameChangeHandler}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions>
-        <Button onClick={clickHandler} size="small">
-          {t("submit")}
-        </Button>
-      </CardActions>
-    </Card>
+        </CardContent>
+        <CardActions>
+          <Button onClick={clickHandler} size="small">
+            {t("submit")}
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 
