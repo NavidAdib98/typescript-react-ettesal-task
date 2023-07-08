@@ -56,43 +56,45 @@ const AddNote: React.FC = () => {
     setTitle("");
   };
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h6" component="h2">
-          {t("add")}
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              label={t("title")}
-              multiline
-              rows={1}
-              variant="outlined"
-              fullWidth
-              value={title}
-              onChange={titleChangeHandler}
-            />
+    <form>
+      <Card>
+        <CardContent>
+          <Typography variant="h6" component="h2">
+            {t("add")}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label={t("title")}
+                multiline
+                rows={1}
+                variant="outlined"
+                fullWidth
+                value={title}
+                onChange={titleChangeHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              {/* Second text field */}
+              <TextField
+                label={t("content")}
+                multiline
+                rows={3}
+                variant="outlined"
+                fullWidth
+                value={content}
+                onChange={contentChangeHandler}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            {/* Second text field */}
-            <TextField
-              label={t("content")}
-              multiline
-              rows={3}
-              variant="outlined"
-              fullWidth
-              value={content}
-              onChange={contentChangeHandler}
-            />
-          </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions>
-        <Button onClick={submitHandler} size="small">
-          {t("add")}
-        </Button>
-      </CardActions>
-    </Card>
+        </CardContent>
+        <CardActions>
+          <Button onClick={submitHandler} size="small">
+            {t("add")}
+          </Button>
+        </CardActions>
+      </Card>
+    </form>
   );
 };
 

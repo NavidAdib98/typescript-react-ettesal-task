@@ -31,7 +31,7 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
   };
 
   return (
-    <div style={{ height: "85vh" }}>
+    <form style={{ height: "85vh" }}>
       <Card sx={{ m: 10 }}>
         <CardContent>
           <Typography variant="h6" component="h2">
@@ -40,6 +40,8 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                required
+                name="username"
                 label={t("name")}
                 multiline
                 rows={1}
@@ -57,7 +59,7 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
           </Button>
         </CardActions>
       </Card>
-    </div>
+    </form>
   );
 };
 

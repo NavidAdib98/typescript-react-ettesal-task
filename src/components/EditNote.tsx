@@ -71,7 +71,7 @@ const EditNote: React.FC = () => {
     navigate("/", { replace: true });
   };
   return (
-    <div style={{ height: "85vh" }}>
+    <form style={{ height: "85vh" }}>
       <Card sx={{ m: 10 }}>
         <CardContent>
           <Typography variant="h6" component="h2">
@@ -80,6 +80,7 @@ const EditNote: React.FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                name="title"
                 label={t("title")}
                 multiline
                 rows={1}
@@ -92,6 +93,7 @@ const EditNote: React.FC = () => {
             <Grid item xs={12}>
               {/* Second text field */}
               <TextField
+                name="content"
                 label={t("content")}
                 multiline
                 rows={3}
@@ -112,7 +114,7 @@ const EditNote: React.FC = () => {
           </Button>
         </CardActions>
       </Card>
-    </div>
+    </form>
   );
 };
 
