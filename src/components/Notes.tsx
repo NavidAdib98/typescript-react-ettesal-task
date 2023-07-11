@@ -11,37 +11,32 @@ import { Grid } from "@mui/material";
 import Note from "./Note";
 
 //utils
-import {
-  getFromLocalStorage,
-  removeFromLocalStorage,
-} from "../utils/localStorageFunctions";
+import { removeFromLocalStorage } from "../utils/localStorageFunctions";
+
+//custom Hooks
+import useFetchApi from "../hooks/useFetchApi";
+import useGetLocalStorage from "../hooks/useGetLocalStorage";
 
 const Notes: React.FC = () => {
+  const { data: data_api } = useFetchApi(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+
+  const { data: data_storage } = useGetLocalStorage();
+
   const notes: NoteType[] = useSelector(
     (state: NotesReducerStateType) => state.notes
   );
   const dispatch = useDispatch();
-
   const deleteHandler = (id: number) => {
     removeFromLocalStorage(id);
     dispatch({ type: "REMOVE", payload: id });
   };
 
   useEffect(() => {
-    const loadData = async () => {
-      let respons = await fetch("https://jsonplaceholder.typicode.com/posts");
-      let data_api = await respons.json();
-      data_api.forEach((d: NoteType) => {
-        d.source = "api";
-      });
-      let data_storage: NoteType[] = getFromLocalStorage();
-      dispatch({
-        type: "FETCH_ALL_NOTES",
-        payload: [...data_storage, ...data_api],
-      });
-    };
-    loadData();
-  }, []);
+    const data: NoteType[] = [...data_storage, ...data_api];
+    dispatch({ type: "FETCH_ALL_NOTES", payload: data });
+  }, [data_api, data_storage, dispatch]);
 
   return (
     <Grid container alignItems="center" spacing={3}>

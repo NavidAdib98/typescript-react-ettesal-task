@@ -3,5 +3,5 @@ export interface NoteType {
   title: string;
   body: string;
   userId: number;
-  source: "api" | "localstorage";
+  source?: "api" | "localstorage";
 }

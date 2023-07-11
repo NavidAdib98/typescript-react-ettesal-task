@@ -71,7 +71,7 @@ const EditNote: React.FC = () => {
     navigate("/", { replace: true });
   };
   return (
-    <form style={{ height: "85vh" }}>
+    <form style={{ minHeight: "85vh" }}>
       <Card sx={{ m: 10 }}>
         <CardContent>
           <Typography variant="h6" component="h2">
