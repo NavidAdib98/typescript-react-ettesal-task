@@ -1,10 +1,6 @@
 # About this app
 
-In this project we have Notes book.
-at first your are propt to add your "username"
-then dummy data will fetch from jsonplaceholder api.
-also you can add your own notes, delete or edit them.
-only apis data has not the ability to persistantly edit or remove. but your own data is persistance
+This project includes a Notes book feature. Initially, you will be prompted to enter your "username". Afterwards, the application will fetch dummy data from the jsonplaceholder API. You can add, delete, or edit your own notes within the Notes book. Note that only the dummy data does not have the persistence feature to edit or remove data permanently. However, your own data will be stored persistently in local storage. The application also offers bilingual support for both English and Persian languages.
 
 ## Available Scripts
 
