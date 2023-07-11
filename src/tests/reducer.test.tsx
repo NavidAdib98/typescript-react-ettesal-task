@@ -15,17 +15,19 @@ describe("NotesReducer", () => {
           userId: 1,
         },
       ],
+      status: "success",
+      error: false,
     };
   });
 
   it("should return the initial state", () => {
     const action = { type: "UNKNOWN" };
     const nextState = NotesReducer(undefined, action);
-    expect(nextState).toEqual({ notes: [] });
+    expect(nextState).toEqual({ notes: [], status: "ideal", error: false });
   });
 
-  it("should handle FETCH_ALL_NOTES", () => {
-    const action = { type: "FETCH_ALL_NOTES", payload: state.notes };
+  it("should handle FETCH_SUCCESS", () => {
+    const action = { type: "FETCH_SUCCESS", payload: state.notes };
     const nextState = NotesReducer(undefined, action);
     expect(nextState).toEqual(state);
   });

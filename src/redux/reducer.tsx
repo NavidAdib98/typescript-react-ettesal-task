@@ -2,11 +2,15 @@ import { NoteType } from "../constants/types";
 
 export interface NotesReducerStateType {
   notes: NoteType[];
+  error: boolean;
+  status: string;
 }
 
 // Define the initial state
 const initialState: NotesReducerStateType = {
   notes: [],
+  error: false,
+  status: "ideal",
 };
 
 // Define the action type
@@ -21,13 +25,17 @@ const NotesReducer = (
   action: AppAction
 ): NotesReducerStateType => {
   switch (action.type) {
-    case "FETCH_ALL_NOTES":
-      return { notes: action.payload };
+    case "FETCH_REQUEST":
+      return { notes: [], error: false, status: "loading" };
+    case "FETCH_SUCCESS":
+      return { notes: action.payload, error: false, status: "success" };
+    case "FETCH_ERROR":
+      return { notes: [], error: true, status: action.payload };
     case "ADD":
-      return { notes: [action.payload, ...state.notes] };
+      return { ...state, notes: [action.payload, ...state.notes] };
     case "REMOVE":
       let filterd = state.notes.filter((item) => item.id !== action.payload);
-      return { notes: filterd };
+      return { ...state, notes: filterd };
     case "EDIT":
       let filterd1 = state.notes.filter(
         (item) => item.id !== action.payload.id
@@ -37,7 +45,7 @@ const NotesReducer = (
       )[0];
       note.body = action.payload.body;
       note.title = action.payload.title;
-      return { notes: [note, ...filterd1] };
+      return { ...state, notes: [note, ...filterd1] };
 
     default:
       return state;
