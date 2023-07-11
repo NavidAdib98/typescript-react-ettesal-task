@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# About this app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this project we have Notes book.
+at first your are propt to add your "username"
+then dummy data will fetch from jsonplaceholder api.
+also you can add your own notes, delete or edit them.
+only apis data has not the ability to persistantly edit or remove. but your own data is persistance
 
 ## Available Scripts
 
