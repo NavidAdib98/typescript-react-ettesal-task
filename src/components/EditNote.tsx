@@ -55,7 +55,8 @@ const EditNote: React.FC = () => {
       }
     }
   }, []);
-  const editHandler = () => {
+  const editHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (typeof id === "string") {
       if (source === "api") {
         dispatch({
@@ -71,7 +72,7 @@ const EditNote: React.FC = () => {
     navigate("/", { replace: true });
   };
   return (
-    <form style={{ minHeight: "85vh" }}>
+    <form onSubmit={editHandler} style={{ minHeight: "85vh" }}>
       <Card sx={{ m: 10 }}>
         <CardContent>
           <Typography variant="h6" component="h2">
@@ -88,6 +89,7 @@ const EditNote: React.FC = () => {
                 fullWidth
                 value={title}
                 onChange={titleChangeHandler}
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -101,6 +103,7 @@ const EditNote: React.FC = () => {
                 fullWidth
                 value={content}
                 onChange={contentChangeHandler}
+                required
               />
             </Grid>
           </Grid>
@@ -109,7 +112,7 @@ const EditNote: React.FC = () => {
           <Button onClick={() => navigate("/", { replace: true })} size="small">
             {t("back")}
           </Button>
-          <Button onClick={editHandler} size="small">
+          <Button type="submit" size="small">
             {t("edit")}
           </Button>
         </CardActions>

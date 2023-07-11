@@ -17,6 +17,7 @@ import {
   CardActions,
   Typography,
   Grid,
+  InputLabel,
 } from "@mui/material";
 // translation
 import { useTranslation } from "react-i18next";
@@ -61,12 +62,13 @@ const AddNote: React.FC = () => {
       <Card>
         <CardContent>
           <Typography variant="h6" component="h2">
-            {t("add")}
+            {t("add-note")}
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
+              <InputLabel htmlFor="title">{t("title")}</InputLabel>
               <TextField
-                label={t("title")}
+                id="title"
                 multiline
                 rows={1}
                 variant="outlined"
@@ -76,9 +78,9 @@ const AddNote: React.FC = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              {/* Second text field */}
+              <InputLabel htmlFor="content">{t("content")}</InputLabel>
               <TextField
-                label={t("content")}
+                id="content"
                 multiline
                 rows={3}
                 variant="outlined"

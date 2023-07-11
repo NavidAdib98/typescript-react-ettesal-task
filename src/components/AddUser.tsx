@@ -9,6 +9,7 @@ import {
   CardActions,
   Typography,
   Grid,
+  InputLabel,
 } from "@mui/material";
 
 // translation
@@ -45,10 +46,12 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
+              <InputLabel required htmlFor="username">
+                {t("name")}
+              </InputLabel>
               <TextField
-                required
+                id="username"
                 name="username"
-                label={t("name")}
                 multiline
                 rows={1}
                 variant="outlined"
@@ -56,6 +59,10 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
                 value={name}
                 onChange={nameChangeHandler}
                 onKeyDown={handleKeyDown}
+                InputProps={{
+                  inputProps: { maxLength: 20 },
+                }}
+                required
               />
             </Grid>
           </Grid>
