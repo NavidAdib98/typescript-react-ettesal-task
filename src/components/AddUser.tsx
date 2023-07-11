@@ -25,13 +25,19 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
   const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-  const clickHandler = () => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     localStorage.setItem("userName", JSON.stringify(name));
     setUserName(name);
   };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      localStorage.setItem("userName", JSON.stringify(name));
+      setUserName(name);
+    }
+  };
 
   return (
-    <form style={{ minHeight: "85vh" }}>
+    <form onSubmit={submitHandler} style={{ minHeight: "85vh" }}>
       <Card sx={{ m: 10 }}>
         <CardContent>
           <Typography variant="h6" component="h2">
@@ -49,12 +55,13 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
                 fullWidth
                 value={name}
                 onChange={nameChangeHandler}
+                onKeyDown={handleKeyDown}
               />
             </Grid>
           </Grid>
         </CardContent>
         <CardActions>
-          <Button onClick={clickHandler} size="small">
+          <Button type="submit" size="small">
             {t("submit")}
           </Button>
         </CardActions>

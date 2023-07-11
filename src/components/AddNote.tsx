@@ -35,7 +35,8 @@ const AddNote: React.FC = () => {
     setContent(event.target.value);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const content_w = content.replace(/\s/g, "");
     const title_w = title.replace(/\s/g, "");
     if (content_w.length === 0 || title_w.length === 0) {
@@ -56,7 +57,7 @@ const AddNote: React.FC = () => {
     setTitle("");
   };
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <Card>
         <CardContent>
           <Typography variant="h6" component="h2">
@@ -89,7 +90,7 @@ const AddNote: React.FC = () => {
           </Grid>
         </CardContent>
         <CardActions>
-          <Button onClick={submitHandler} size="small">
+          <Button type="submit" size="small">
             {t("add")}
           </Button>
         </CardActions>
