@@ -24,6 +24,9 @@ import {
 // translation
 import { useTranslation } from "react-i18next";
 
+//keys
+import { key_Notes } from "../constants/localStorageKeys";
+
 const EditNote: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -49,7 +52,10 @@ const EditNote: React.FC = () => {
         });
     } else if (source === "localstorage") {
       if (typeof id === "string") {
-        const note: NoteType = getOneItemFromLocalStorage(Number(id));
+        const note: NoteType = getOneItemFromLocalStorage(
+          key_Notes,
+          Number(id)
+        );
         setContent(note.body);
         setTitle(note.title);
       }
@@ -64,7 +70,7 @@ const EditNote: React.FC = () => {
           payload: { id: Number(id), title: title, body: content },
         });
       } else {
-        editFromLocalStorage(Number(id), title, content);
+        editFromLocalStorage(key_Notes, Number(id), title, content);
       }
     }
     setContent("");

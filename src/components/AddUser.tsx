@@ -15,6 +15,9 @@ import {
 // translation
 import { useTranslation } from "react-i18next";
 
+//keys
+import { key_username } from "../constants/localStorageKeys";
+
 interface Props {
   setUserName: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -27,12 +30,12 @@ const EditNote: React.FC<Props> = ({ setUserName }: Props) => {
     setName(event.target.value);
   };
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    localStorage.setItem("userName", JSON.stringify(name));
+    localStorage.setItem(key_username, JSON.stringify(name));
     setUserName(name);
   };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      localStorage.setItem("userName", JSON.stringify(name));
+      localStorage.setItem(key_username, JSON.stringify(name));
       setUserName(name);
     }
   };

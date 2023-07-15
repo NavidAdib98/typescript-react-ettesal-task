@@ -1,4 +1,4 @@
-import NotesReducer, { NotesReducerStateType } from "../redux/reducer";
+import NotesReducer, { NotesReducerStateType } from "./reducer";
 describe("NotesReducer", () => {
   let state: NotesReducerStateType;
 

@@ -1,6 +1,6 @@
 import { NoteType } from "../constants/types";
-const key = "UserData";
-export function addToLocalStorage(data: NoteType) {
+
+export function addToLocalStorage(key: string, data: NoteType) {
   const existingValue = localStorage.getItem(key);
 
   if (existingValue === null || existingValue === undefined) {
@@ -17,7 +17,7 @@ export function addToLocalStorage(data: NoteType) {
   }
 }
 
-export function getFromLocalStorage(): NoteType[] {
+export function getFromLocalStorage(key: string): NoteType[] {
   const existingValue = localStorage.getItem(key);
 
   if (existingValue === null || existingValue === undefined) {
@@ -28,24 +28,25 @@ export function getFromLocalStorage(): NoteType[] {
   }
 }
 
-export function getOneItemFromLocalStorage(id: number): NoteType {
-  const local_data: NoteType[] = getFromLocalStorage();
+export function getOneItemFromLocalStorage(key: string, id: number): NoteType {
+  const local_data: NoteType[] = getFromLocalStorage(key);
   const note: NoteType = local_data.filter((item) => item.id === id)[0];
   return note;
 }
 
-export function removeFromLocalStorage(id: number): void {
-  const local_data: NoteType[] = getFromLocalStorage();
+export function removeFromLocalStorage(key: string, id: number): void {
+  const local_data: NoteType[] = getFromLocalStorage(key);
   const filterd: NoteType[] = local_data.filter((item) => item.id !== id);
   localStorage.setItem(key, JSON.stringify(filterd));
 }
 
 export function editFromLocalStorage(
+  key: string,
   id: number,
   title: string,
   content: string
 ): void {
-  const local_data: NoteType[] = getFromLocalStorage();
+  const local_data: NoteType[] = getFromLocalStorage(key);
   const filterd: NoteType[] = local_data.filter((item) => item.id !== id);
   let note: NoteType = local_data.filter((item) => item.id === id)[0];
   note.body = content;

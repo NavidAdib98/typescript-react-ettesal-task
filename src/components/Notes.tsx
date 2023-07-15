@@ -17,6 +17,9 @@ import { removeFromLocalStorage } from "../utils/localStorageFunctions";
 import useFetchApi from "../hooks/useFetchApi";
 import useGetLocalStorage from "../hooks/useGetLocalStorage";
 
+//keys
+import { key_Notes } from "../constants/localStorageKeys";
+
 const Notes: React.FC = () => {
   const { data: data_api, error: error_api } = useFetchApi(
     "https://jsonplaceholder.typicode.com/posts"
@@ -29,7 +32,7 @@ const Notes: React.FC = () => {
   );
   const dispatch = useDispatch();
   const deleteHandler = (id: number) => {
-    removeFromLocalStorage(id);
+    removeFromLocalStorage(key_Notes, id);
     dispatch({ type: "REMOVE", payload: id });
   };
 

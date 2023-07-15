@@ -22,6 +22,9 @@ import {
 // translation
 import { useTranslation } from "react-i18next";
 
+//keys
+import { key_Notes } from "../constants/localStorageKeys";
+
 const AddNote: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -52,7 +55,7 @@ const AddNote: React.FC = () => {
         body: content,
       };
       dispatch({ type: "ADD", payload: data });
-      addToLocalStorage(data);
+      addToLocalStorage(key_Notes, data);
     }
     setContent("");
     setTitle("");
