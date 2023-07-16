@@ -6,12 +6,8 @@ import "./App.css";
 import { store } from "./redux/stor";
 import { Provider } from "react-redux";
 
-//components
-import Main from "./components/Main";
-import EditNote from "./components/EditNote";
-import Header from "./components/Header";
-import AddUser from "./components/AddUser";
-import Footer from "./components/Footer";
+//routes
+import RouteList from "./routes";
 
 // translation
 import { useTranslation } from "react-i18next";
@@ -27,17 +23,7 @@ function App() {
   }, [i18n.language]);
   return (
     <Provider store={store}>
-      <Header name={userName} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            userName.length ? <Main /> : <AddUser setUserName={setUserName} />
-          }
-        />
-        <Route path="/:source/:id" element={<EditNote />} />
-      </Routes>
-      <Footer />
+      <RouteList />
     </Provider>
   );
 }

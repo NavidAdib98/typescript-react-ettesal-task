@@ -85,6 +85,13 @@ describe("LocalStorage Utils", () => {
       const valueInLocalStorage = localStorage.getItem(key);
       expect(JSON.parse(valueInLocalStorage!)).toEqual(remainingNotes);
     });
+    it("should remove nothing if given id doesnt exist", () => {
+      const existingNotes: NoteType[] = [note1, note2];
+      localStorage.setItem(key, JSON.stringify(existingNotes));
+      removeFromLocalStorage(key, 3);
+      const valueInLocalStorage = localStorage.getItem(key);
+      expect(JSON.parse(valueInLocalStorage!)).toEqual(existingNotes);
+    });
   });
 
   describe("editFromLocalStorage", () => {
