@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { useKeycloak } from "@react-keycloak/web";
+import { KeycloakLoginOptions, Acr } from "keycloak-js";
 //styles
 import {
   Card,
@@ -15,27 +16,41 @@ import {
 // translation
 import { useTranslation } from "react-i18next";
 
-// interface Props {
-//   setUserName: React.Dispatch<React.SetStateAction<string>>;
-// }
 interface LoginFormData {
   phone: string;
   password: string;
 }
 
-const EditNote: React.FC = () => {
+const Login: React.FC = () => {
+  const { keycloak } = useKeycloak();
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState<LoginFormData>({
     phone: "",
     password: "",
   });
+
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(keycloak);
+    // const credentials: KeycloakLoginOptions = {
+    //   grant_type: "password",
+    //   username: formData.phone,
+    //   password: formData.password,
+    // };
+
+    // keycloak
+    //   .login(credentials)
+    //   .then((authenticated) => {
+    //     // Handle successful authentication
+    //   })
+    //   .catch((error) => {
+    //     // Handle authentication error
+    //   });
   };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {};
 
@@ -98,4 +113,4 @@ const EditNote: React.FC = () => {
   );
 };
 
-export default EditNote;
+export default Login;
