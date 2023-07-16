@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 //   setUserName: React.Dispatch<React.SetStateAction<string>>;
 // }
 interface LoginFormData {
-  email: string;
+  phone: string;
   password: string;
 }
 
@@ -27,7 +27,7 @@ const EditNote: React.FC = () => {
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState<LoginFormData>({
-    email: "",
+    phone: "",
     password: "",
   });
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,20 +48,21 @@ const EditNote: React.FC = () => {
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <InputLabel required htmlFor="email">
-                {t("email")}
+              <InputLabel required htmlFor="phone">
+                {t("phone")}
               </InputLabel>
               <TextField
-                type="email"
-                id="email"
-                name="email"
+                placeholder="0912..."
+                type="tel"
+                id="phone"
+                name="phone"
                 variant="outlined"
                 fullWidth
-                value={formData.email}
+                value={formData.phone}
                 onChange={changeHandler}
                 onKeyDown={handleKeyDown}
                 InputProps={{
-                  inputProps: { maxLength: 30 },
+                  inputProps: { type: "tel", pattern: "[0-9]*" },
                 }}
                 required
               />
