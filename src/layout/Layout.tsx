@@ -11,7 +11,9 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: 80 }}>{children}</div>
+      <div style={{ marginTop: 80, marginLeft: 10, marginRight: 10 }}>
+        {children}
+      </div>
       <Footer />
     </>
   );
