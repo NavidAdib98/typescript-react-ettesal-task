@@ -1,10 +1,13 @@
 import Keycloak from "keycloak-js";
+import { keycloak_constant } from "./constant";
+const { keycloak_server_url, realm, clientId, clientSecret } =
+  keycloak_constant;
 
 const keycloak = new Keycloak({
-  url: "https://account.videocake.ir:40443/auth",
-  realm: "ettesal",
-  clientId: "webapp-test",
+  url: keycloak_server_url,
+  realm: realm,
+  clientId: clientId,
 });
-keycloak.clientSecret = "cfccf6b4-66c0-428d-a445-a214740f71d0";
+keycloak.clientSecret = clientSecret;
 
 export default keycloak;

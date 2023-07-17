@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { KeycloakLoginOptions, Acr } from "keycloak-js";
+import { useNavigate } from "react-router-dom";
+
+//plogin
+import plogin from "../auth/plogin";
+
 //styles
 import {
   Card,
@@ -17,18 +22,21 @@ import {
 import { useTranslation } from "react-i18next";
 
 interface LoginFormData {
-  phone: string;
+  username: string;
   password: string;
 }
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const { keycloak } = useKeycloak();
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState<LoginFormData>({
-    phone: "",
+    username: "",
     password: "",
   });
+  const username = formData.username; //formData.username;
+  const password = formData.password; //formData.password;
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -36,21 +44,18 @@ const Login: React.FC = () => {
   };
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(keycloak);
-    // const credentials: KeycloakLoginOptions = {
-    //   grant_type: "password",
-    //   username: formData.phone,
-    //   password: formData.password,
-    // };
-
-    // keycloak
-    //   .login(credentials)
-    //   .then((authenticated) => {
-    //     // Handle successful authentication
-    //   })
-    //   .catch((error) => {
-    //     // Handle authentication error
-    //   });
+    try {
+      await plogin(keycloak, username, password);
+      if (keycloak.authenticated) {
+        console.log("User is authenticated");
+        navigate("/dashboard");
+      } else {
+        console.log("User is not authenticated");
+      }
+    } catch (error) {
+      let e = error as Error;
+      console.error(e.message);
+    }
   };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {};
 
@@ -63,21 +68,21 @@ const Login: React.FC = () => {
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <InputLabel required htmlFor="phone">
-                {t("phone")}
+              <InputLabel required htmlFor="username">
+                {t("username")}
               </InputLabel>
               <TextField
-                placeholder="0912..."
-                type="tel"
-                id="phone"
-                name="phone"
+                placeholder="username..." //"0912..."
+                type="text"
+                id="username"
+                name="username"
                 variant="outlined"
                 fullWidth
-                value={formData.phone}
+                value={formData.username}
                 onChange={changeHandler}
                 onKeyDown={handleKeyDown}
                 InputProps={{
-                  inputProps: { type: "tel", pattern: "[0-9]*" },
+                  inputProps: { type: "tel" }, // pattern: "[0-9]*"
                 }}
                 required
               />
